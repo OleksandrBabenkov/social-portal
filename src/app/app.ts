@@ -1,12 +1,30 @@
-import { Component, signal } from '@angular/core';
+// src/app/app.component.ts
+import { Component } from '@angular/core';
+
+// ## 1. Import Standalone Dependencies ##
+// We must import these for *ngIf, async pipe, and <router-outlet>
+import { CommonModule } from '@angular/common'; 
 import { RouterOutlet } from '@angular/router';
+
+// ## 2. Import our AuthService ##
+import { AuthService } from './services/auth';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+
+  // ## 3. Mark as Standalone ##
+  standalone: true,  
+
+  // ## 4. Add Imports Array ##
+  imports: [
+    CommonModule,  // <-- Required for *ngIf, *ngFor, async pipe
+    RouterOutlet   // <-- Required for <router-outlet>
+  ],
+  
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('social-portal');
+  // This logic is exactly the same as before
+  constructor(public auth: AuthService) {}
 }
