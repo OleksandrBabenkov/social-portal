@@ -1,0 +1,51 @@
+<div class="mx-auto max-w-7xl p-4">
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-4">
+
+    <aside class="order-last lg:order-first lg:col-span-1">
+      <div class="sticky top-20 rounded-lg bg-white p-4 shadow-md">
+        <h3 class="mb-3 text-lg font-semibold">Events</h3>
+        <div class="mb-4 rounded-md border border-gray-200 p-3">
+          <p class="font-medium">Community Meetup</p>
+          <p class="text-sm text-gray-500">Tomorrow at 6:00 PM</p>
+        </div>
+        <h3 class="mb-3 mt-6 text-lg font-semibold">Fanpages</h3>
+        <div class="rounded-md border border-gray-200 p-3">
+          <p class="font-medium">Angular Developers</p>
+          <p class="text-sm text-gray-500">@angular_devs</p>
+        </div>
+        </div>
+    </aside>
+
+    <main class="lg:col-span-3">
+      <div class="flex flex-col space-y-6">
+
+        <app-create-post></app-create-post>
+
+        <div class="rounded-lg bg-white p-4 shadow-md">
+          <p class="font-semibold">Placeholder: Post 1</p>
+        </div>
+        <div class="rounded-lg bg-white p-4 shadow-md">
+          <p class="font-semibold">Placeholder: Post 2</p>
+        </div>
+
+        <div class="rounded-lg bg-white p-4 shadow-md">
+          <p class="font-semibold">Placeholder: Post 3</p>
+        </div>
+        <div class="rounded-lg bg-white p-4 shadow-md">
+          <p class="font-semibold">Placeholder: Post 4</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <a routerLink="/events" class="block rounded-lg bg-blue-500 p-6 text-center text-xl font-bold text-white shadow-md hover:bg-blue-600">
+            Go to Events
+          </a>
+          <a routerLink="/fanpages" class="block rounded-lg bg-purple-500 p-6 text-center text-xl font-bold text-white shadow-md hover:bg-purple-600">
+            Go to Fanpages
+          </a>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>

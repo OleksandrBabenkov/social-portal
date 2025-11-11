@@ -5,6 +5,7 @@ import { colors } from './src/styles/theme'; // <-- Import your theme
 const config: Config = {
   content: [
     './index.html',
+    "./src/**/*.{html,ts}",
     './src/**/*.{js,ts,jsx,tsx}', // <-- Tell Tailwind where your files are
   ],
   theme: {

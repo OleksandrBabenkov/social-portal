@@ -1,0 +1,54 @@
+<nav class="sticky top-0 z-50 bg-white shadow-md">
+  <div class="mx-auto max-w-7xl px-4">
+    <div class="flex h-16 items-center justify-between">
+      
+      <div class="flex-shrink-0">
+        <a routerLink="/wall" class="text-2xl font-bold text-blue-600">PortalLogo</a>
+      </div>
+
+      <div class="hidden flex-grow px-12 md:flex">
+        <input type="text" placeholder="Search for posts..." 
+               class="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500" />
+      </div>
+
+      <div class="hidden md:flex md:items-center md:space-x-4">
+        <a routerLink="/chat" class="rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12.125a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-3.86 8.25-8.625 8.25a8.625 8.625 0 01-8.625-8.25c0-4.556 3.86-8.25 8.625-8.25 4.765 0 8.625 3.694 8.625 8.25z" /></svg>
+        </a>
+        <button class="relative rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
+          <span class="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">3</span>
+        </button>
+
+        <div *ngIf="auth.user$ | async as user" class="relative">
+          <button class="flex rounded-full bg-gray-800 text-sm focus:outline-none">
+            <img class="h-8 w-8 rounded-full" [src]="user.photoURL" alt="User profile photo">
+          </button>
+          </div>
+        <button (click)="logout()" class="ml-2 rounded bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200">Logout</button>
+      </div>
+
+      <div class="flex md:hidden">
+        <button (click)="toggleMobileMenu()" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500">
+          <svg *ngIf="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+          <svg *ngIf="isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="md:hidden" [class.hidden]="!isMobileMenuOpen">
+    <div class="space-y-1 px-2 pb-3 pt-2">
+      <input type="text" placeholder="Search..." class="w-full rounded-md border border-gray-300 p-2" />
+      
+      <a routerLink="/wall" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100">Wall</a>
+      <a routerLink="/chat" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100">Chat</a>
+      <a routerLink="/events" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100">Events</a>
+      <a routerLink="/profile" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100">Profile</a>
+      <button (click)="logout()" class="w-full rounded-md bg-gray-100 px-3 py-2 text-left text-base font-medium text-gray-700 hover:bg-gray-200">
+        Log Out
+      </button>
+    </div>
+  </div>
+</nav>

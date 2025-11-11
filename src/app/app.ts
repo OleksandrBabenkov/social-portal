@@ -9,6 +9,8 @@ import { RouterOutlet } from '@angular/router';
 // ## 2. Import our AuthService ##
 import { AuthService } from './services/auth';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-root',
 
@@ -18,7 +20,8 @@ import { AuthService } from './services/auth';
   // ## 4. Add Imports Array ##
   imports: [
     CommonModule,  // <-- Required for *ngIf, *ngFor, async pipe
-    RouterOutlet   // <-- Required for <router-outlet>
+    RouterOutlet,   // <-- Required for <router-outlet>
+    ReactiveFormsModule  // <-- For reactive forms
   ],
   
   templateUrl: './app.html',

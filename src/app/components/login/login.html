@@ -1,0 +1,65 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-100 p-4">
+  <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
+
+    <div class="mb-6 flex justify-start">
+      <span class="text-2xl font-bold text-blue-600">PortalLogo</span>
+    </div>
+
+    <h2 class="mb-4 text-center text-3xl font-bold text-gray-800">
+      {{ isLoginMode ? 'Welcome Back' : 'Create Account' }}
+    </h2>
+
+    <button (click)="loginWithGoogle()"
+      class="mb-4 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50">
+      <span class="ml-2">Sign in with Google</span>
+    </button>
+
+    <div class="my-4 flex items-center">
+      <div class="flex-grow border-t border-gray-300"></div>
+      <span class="mx-4 text-gray-500">or</span>
+      <div class="flex-grow border-t border-gray-300"></div>
+    </div>
+
+    <form [formGroup]="isLoginMode ? loginForm : signUpForm" (ngSubmit)="onSubmit()">
+
+      <div *ngIf="!isLoginMode" class="mb-4">
+        <label for="displayName" class="mb-2 block text-sm font-medium text-gray-600">Display Name</label>
+        <input formControlName="displayName" type="text"
+          class="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500" />
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="mb-2 block text-sm font-medium text-gray-600">Email</label>
+        <input [formControlName]="isLoginMode ? 'email' : 'email'" type="email"
+          class="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500" />
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="mb-2 block text-sm font-medium text-gray-600">Password</label>
+        <input [formControlName]="isLoginMode ? 'password' : 'password'" type="password"
+          class="w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500" />
+      </div>
+
+      <div *ngIf="authError" class="mb-4 rounded bg-red-100 p-3 text-center text-sm text-red-700">
+        {{ authError }}
+      </div>
+
+      <button type="submit" [disabled]="(isLoginMode ? loginForm.invalid : signUpForm.invalid)"
+        class="w-full rounded-md bg-blue-600 px-4 py-2 font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50">
+        {{ isLoginMode ? 'Log In' : 'Sign Up' }}
+      </button>
+    </form>
+
+    <div class="mt-6 flex flex-col items-center text-sm">
+      <a (click)="toggleMode()" class="cursor-pointer font-medium text-blue-600 hover:underline">
+        {{ isLoginMode ? 'Need an account? Sign Up' : 'Have an account? Log In' }}
+      </a>
+
+      <a *ngIf="isLoginMode" (click)="forgotPassword()"
+        class="mt-2 cursor-pointer text-gray-500 hover:underline">
+        Forgot Password?
+      </a>
+    </div>
+
+  </div>
+</div>
