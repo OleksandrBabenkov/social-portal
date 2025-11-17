@@ -28,7 +28,8 @@ export class CreatePost {
   // This will be our data model in the next step
   // For now, it just logs to the console.
   async onSubmit() {
-    if (this.postForm.valid || this.isLoading) {
+    if (this.postForm.invalid || this.isLoading) {
+      console.log('page had not yet loaded or post form is not valid');
       return;
     }
 

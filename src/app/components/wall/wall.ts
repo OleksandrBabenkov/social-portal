@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth';
 import { RouterModule } from '@angular/router'; // <-- ADD THIS
 import { ReactiveFormsModule } from '@angular/forms'; // <-- ADD THIS
 import { CreatePost } from '../post/create-post/create-post'; // <-- ADD THIS
+import { PostList } from '../post/post-list/post-list';
 
 @Component({
   selector: 'app-wall',
@@ -13,7 +14,8 @@ import { CreatePost } from '../post/create-post/create-post'; // <-- ADD THIS
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    CreatePost
+    CreatePost,
+    PostList
   ], // <-- ADD THIS
   templateUrl: './wall.html',
   styleUrls: ['./wall.css']
