@@ -9,6 +9,7 @@ import { authGuard } from './guards/auth.guard';
 import { publicGuard } from './guards/public.guard';
 
 import { EventsComponent } from './components/events/events';
+import { ChatComponent } from './components/chat/chat';
 
 
 export const routes: Routes = [
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'wall', component: Wall },
       { path: '', redirectTo: 'wall', pathMatch: 'full' },
       { path: 'events', component: EventsComponent }, // <-- ADD THIS LINE
+      { path: 'chat', component: ChatComponent },  // <-- ADD THIS LINE
     ]
   },
   // A simple fallback for any other random URL

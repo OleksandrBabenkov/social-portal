@@ -34,3 +34,19 @@ export interface CommunityEvent {
   attendees: string[]; // List of UIDs of people going
   imageUrl?: string; // Optional cover image
 }
+
+export interface Message {
+  text: string;
+  senderId: string;
+  sentAt: Timestamp;
+}
+
+export interface Chat {
+  id: string;
+  userIds: string[]; // Array of the 2 users in the chat
+  lastMessage?: string;
+  lastMessageTime?: Timestamp;
+  
+  // For UI display (we join this data in the service)
+  otherUser?: User; 
+}
