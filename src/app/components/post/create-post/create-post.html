@@ -1,7 +1,7 @@
 <div class="rounded-lg bg-white p-4 shadow-md" *ngIf="auth.user$ | async as user">
   <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
     <div class="flex space-x-4">
-      <img [src]="user.photoURL" alt="Your avatar" class="h-12 w-12 rounded-full" />
+      <img [src]="user.photoURL" alt="Your avatar" referrerpolicy="no-referrer" class="h-12 w-12 rounded-full" />
 
       <textarea formControlName="content"
         class="w-full rounded-md border border-gray-300 p-3"
@@ -14,6 +14,12 @@
         <button type="button" class="rounded-full p-2 text-gray-500 hover:bg-gray-100">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm1.5-3l2.88-2.88a1.125 1.125 0 011.59 0l2.88 2.88" /></svg>
         </button>
+
+        <button type="button" (click)="toggleEventModal()" 
+          class="flex items-center rounded-full px-3 py-1 text-sm text-blue-600 hover:bg-blue-50">
+          <span class="mr-1 text-lg">+</span> Event
+        </button>
+
       </div>
 
         <button type="submit" [disabled]="postForm.invalid || isLoading"
@@ -21,5 +27,9 @@
         {{ isLoading ? 'Posting...' : 'Post' }}
         </button>
     </div>
+    <app-create-event-modal 
+      *ngIf="showEventModal" 
+      (close)="showEventModal = false">
+    </app-create-event-modal>
   </form>
 </div>

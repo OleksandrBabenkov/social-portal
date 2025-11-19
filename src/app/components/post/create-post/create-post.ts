@@ -5,10 +5,12 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms'; /
 import { AuthService } from '../../../services/auth';
 import { PostService } from '../../../services/post';
 
+import { CreateEventModal } from '../../events/create-event-modal/create-event-modal'; // <-- IMPORT
+
 @Component({
   selector: 'app-create-post',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // <-- Add ReactiveFormsModule
+  imports: [CommonModule, ReactiveFormsModule, CreateEventModal], // <-- Add ReactiveFormsModule
   templateUrl: './create-post.html',
   styleUrls: ['./create-post.css']
 })
@@ -19,6 +21,12 @@ export class CreatePost {
   postService = inject(PostService);
 
   isLoading = false;
+
+  showEventModal = false; // <-- State for the modal
+
+  toggleEventModal() {
+    this.showEventModal = !this.showEventModal;
+  }
 
   // We'll add a simple form for the post content
   postForm = this.fb.group({

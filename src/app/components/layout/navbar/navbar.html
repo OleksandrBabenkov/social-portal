@@ -22,7 +22,7 @@
 
         <div *ngIf="auth.user$ | async as user" class="relative">
           <button class="flex rounded-full bg-gray-800 text-sm focus:outline-none">
-            <img class="h-8 w-8 rounded-full" [src]="user.photoURL" alt="User profile photo">
+            <img class="h-8 w-8 rounded-full" [src]="user.photoURL" referrerpolicy="no-referrer" alt="User profile photo">
           </button>
           </div>
         <button (click)="logout()" class="ml-2 rounded bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200">Logout</button>

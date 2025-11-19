@@ -8,6 +8,8 @@ import { MainLayout } from './components/layout/main-layout/main-layout';
 import { authGuard } from './guards/auth.guard';
 import { publicGuard } from './guards/public.guard';
 
+import { EventsComponent } from './components/events/events';
+
 
 export const routes: Routes = [
 {
@@ -21,7 +23,8 @@ export const routes: Routes = [
     canActivate: [authGuard], // <-- Protects all child routes
     children: [
       { path: 'wall', component: Wall },
-      { path: '', redirectTo: 'wall', pathMatch: 'full' }
+      { path: '', redirectTo: 'wall', pathMatch: 'full' },
+      { path: 'events', component: EventsComponent }, // <-- ADD THIS LINE
     ]
   },
   // A simple fallback for any other random URL

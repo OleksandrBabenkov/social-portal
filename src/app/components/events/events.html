@@ -1,0 +1,125 @@
+<div class="flex h-[calc(100vh-64px)] flex-col bg-gray-50">
+
+  <div class="bg-white p-4 shadow-sm">
+    <div class="mx-auto flex max-w-7xl space-x-2 overflow-x-auto pb-2 sm:pb-0">
+
+      <button (click)="setFilter('upcoming')" 
+        [class.bg-blue-100]="currentFilter === 'upcoming'" 
+        [class.text-blue-700]="currentFilter === 'upcoming'"
+        class="whitespace-nowrap rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+        Upcoming
+      </button>
+
+      <button (click)="setFilter('week')" 
+        [class.bg-blue-100]="currentFilter === 'week'" 
+        [class.text-blue-700]="currentFilter === 'week'"
+        class="whitespace-nowrap rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+        This Week
+      </button>
+
+      <button (click)="setFilter('participating')" 
+        [class.bg-blue-100]="currentFilter === 'participating'" 
+        [class.text-blue-700]="currentFilter === 'participating'"
+        class="whitespace-nowrap rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+        Participating
+      </button>
+
+      <button (click)="setFilter('past')" 
+        [class.bg-blue-100]="currentFilter === 'past'" 
+        [class.text-blue-700]="currentFilter === 'past'"
+        class="whitespace-nowrap rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+        Past Events
+      </button>
+    </div>
+  </div>
+
+  <div class="mx-auto grid w-full max-w-7xl flex-grow grid-cols-1 gap-6 p-4 md:grid-cols-2">
+
+    <div [class.hidden]="selectedEvent" class="flex h-full flex-col space-y-4 overflow-y-auto md:block">
+
+      <ng-container *ngIf="filteredEvents$ | async as events">
+        <div *ngFor="let event of events" 
+             (click)="selectEvent(event)"
+             class="cursor-pointer rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md"
+             [class.border-blue-500]="selectedEvent?.id === event.id">
+
+          <div class="flex justify-between">
+            <div>
+              <p class="text-sm font-bold text-blue-600">
+                {{ event.date.toDate() | date:'EEE, MMM d • h:mm a' }}
+              </p>
+              <h3 class="text-lg font-bold text-gray-900">{{ event.title }}</h3>
+              <p class="text-sm text-gray-500">{{ event.location }}</p>
+            </div>
+
+            <div class="h-16 w-16 flex-shrink-0 rounded-md bg-gray-200">
+                </div>
+          </div>
+
+          <div class="mt-3 flex items-center justify-between text-xs text-gray-500">
+            <span>{{ event.attendees.length }} people going</span>
+            <span *ngIf="auth.user$ | async as user">
+                <span *ngIf="isAttending(event, user.uid)" class="font-medium text-green-600">✓ You are going</span>
+            </span>
+          </div>
+        </div>
+
+        <div *ngIf="events.length === 0" class="p-8 text-center text-gray-500">
+          No events found for this filter.
+        </div>
+      </ng-container>
+    </div>
+
+    <div *ngIf="selectedEvent" class="flex h-full flex-col rounded-lg bg-white shadow-md md:block">
+
+        <button (click)="selectedEvent = null" class="mb-2 flex items-center p-4 text-sm text-gray-500 hover:text-gray-900 md:hidden">
+            <span class="mr-1">←</span> Back to list
+        </button>
+
+        <div class="h-48 w-full rounded-t-lg bg-gray-300 object-cover"></div>
+
+        <div class="p-6">
+            <p class="text-sm font-bold text-blue-600">
+                {{ selectedEvent.date.toDate() | date:'fullDate' }}
+            </p>
+            <h1 class="mt-2 text-3xl font-bold text-gray-900">{{ selectedEvent.title }}</h1>
+            <p class="mt-1 text-gray-500">{{ selectedEvent.location }}</p>
+
+            <div *ngIf="auth.user$ | async as user" class="mt-6 border-b border-t border-gray-100 py-4">
+                <button (click)="toggleJoin(selectedEvent, user.uid)"
+                    [class.bg-red-100]="isAttending(selectedEvent, user.uid)"
+                    [class.text-red-700]="isAttending(selectedEvent, user.uid)"
+                    [class.bg-blue-600]="!isAttending(selectedEvent, user.uid)"
+                    [class.text-white]="!isAttending(selectedEvent, user.uid)"
+                    class="w-full rounded-lg py-3 font-semibold transition hover:opacity-90">
+                    {{ isAttending(selectedEvent, user.uid) ? 'Leave Event' : 'Join Event' }}
+                </button>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-lg font-bold">About</h3>
+                <p class="mt-2 text-gray-700 whitespace-pre-wrap">{{ selectedEvent.description }}</p>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-lg font-bold">Attendees</h3>
+                <div class="mt-2 flex -space-x-2 overflow-hidden">
+                    <div class="inline-block h-8 w-8 rounded-full bg-gray-400 ring-2 ring-white"></div>
+                    <div class="inline-block h-8 w-8 rounded-full bg-gray-500 ring-2 ring-white"></div>
+                    <div class="mt-1 ml-4 text-sm text-gray-500">
+                        +{{ selectedEvent.attendees.length }} others
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!selectedEvent" class="hidden h-full items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center text-gray-400 md:flex">
+        <div>
+            <p class="text-xl font-semibold">Select an event</p>
+            <p>Click on an event from the list to view details.</p>
+        </div>
+    </div>
+
+  </div>
+</div>

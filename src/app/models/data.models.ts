@@ -23,3 +23,14 @@ export interface Post {
   // We'll add this later
   // likes: string[]; 
 }
+
+export interface CommunityEvent {
+  id?: string;
+  title: string;
+  description: string;
+  date: Timestamp; // When the event happens
+  location: string;
+  organizerId: string;
+  attendees: string[]; // List of UIDs of people going
+  imageUrl?: string; // Optional cover image
+}
