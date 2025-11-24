@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 // ## 2. Import our AuthService ##
-import { AuthService } from './services/auth';
+import { AuthService } from './services/auth.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 

@@ -2,7 +2,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms'; // <-- Import Forms
-import { AuthService } from '../../../services/auth';
+import { AuthService } from '../../../services/auth.service';
 import { PostService } from '../../../services/post';
 
 import { CreateEventModal } from '../../events/create-event-modal/create-event-modal'; // <-- IMPORT

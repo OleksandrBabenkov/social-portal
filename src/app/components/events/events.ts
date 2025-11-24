@@ -2,9 +2,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../../services/event';
-import { AuthService } from '../../services/auth';
+import { AuthService } from '../../services/auth.service';
 import { CommunityEvent } from '../../models/data.models';
-import { Observable, map, combineLatest } from 'rxjs';
+import { Observable, map, combineLatest, BehaviorSubject } from 'rxjs';
 
 // Define filter types
 type FilterType = 'upcoming' | 'week' | 'past' | 'participating';
@@ -20,6 +20,8 @@ export class EventsComponent {
   eventService = inject(EventService);
   auth = inject(AuthService);
 
+  private filterSubject = new BehaviorSubject<FilterType>('upcoming');
+
   currentFilter: FilterType = 'upcoming';
   selectedEvent: CommunityEvent | null = null;
 
@@ -29,9 +31,10 @@ export class EventsComponent {
   // filteredEvents$ combines the raw list + current filter + current user
   filteredEvents$: Observable<CommunityEvent[]> = combineLatest([
     this.rawEvents$, 
-    this.auth.user$
+    this.auth.user$,
+    this.filterSubject
   ]).pipe(
-    map(([events, user]) => {
+    map(([events, user, currentFilter]) => {
       const now = new Date();
       const nextWeek = new Date();
       nextWeek.setDate(now.getDate() + 7);
@@ -39,7 +42,7 @@ export class EventsComponent {
       return events.filter(event => {
         const eventDate = event.date.toDate();
 
-        switch (this.currentFilter) {
+        switch (currentFilter) {
           case 'upcoming':
             return eventDate >= now;
           case 'past':
@@ -59,6 +62,7 @@ export class EventsComponent {
   setFilter(filter: FilterType) {
     this.currentFilter = filter;
     this.selectedEvent = null; // Deselect when changing filters
+    this.filterSubject.next(filter);
   }
 
   selectEvent(event: CommunityEvent) {

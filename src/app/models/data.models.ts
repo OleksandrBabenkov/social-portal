@@ -20,8 +20,16 @@ export interface Post {
   authorName: string;
   authorPhotoURL: string;
   
-  // We'll add this later
-  // likes: string[]; 
+  groupId?: string; // <-- NEW: If present, this post belongs to a group
+}
+
+// 2. ADD Group
+export interface Group {
+  id?: string;
+  name: string;
+  description: string;
+  ownerId: string;      // The creator
+  memberIds: string[];  // List of UIDs who joined
 }
 
 export interface CommunityEvent {

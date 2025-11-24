@@ -8,7 +8,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { addDoc} from '@angular/fire/firestore'; // <-- Ensure imports
 import { firstValueFrom } from 'rxjs'; // <-- Import rxjs
 
-import { AuthService } from './auth';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'

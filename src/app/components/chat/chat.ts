@@ -3,7 +3,7 @@ import { Component, inject, ViewChild, ElementRef, AfterViewChecked } from '@ang
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Use simple forms for chat input
 import { ChatService } from '../../services/chat.service';
-import { AuthService, User } from '../../services/auth';
+import { AuthService, User } from '../../services/auth.service';
 import { Message } from '../../models/data.models';
 import { Observable, combineLatest, map, of, firstValueFrom } from 'rxjs';
 

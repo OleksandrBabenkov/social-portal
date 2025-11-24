@@ -5,7 +5,7 @@ import {
   addDoc, collectionData, Timestamp, doc, setDoc, updateDoc 
 } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth'; // <-- 1. Import Auth directly
-import { User } from './auth'; // Import User interface only
+import { User } from './auth.service'; // Import User interface only
 import { Observable, map } from 'rxjs';
 import { Chat, Message } from '../models/data.models';
 

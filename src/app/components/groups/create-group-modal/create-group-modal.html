@@ -1,0 +1,19 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+  <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
+    <h2 class="mb-4 text-xl font-bold">Create New Group</h2>
+    <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Group Name</label>
+        <input formControlName="name" type="text" class="mt-1 w-full rounded-md border border-gray-300 p-2">
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea formControlName="description" rows="3" class="mt-1 w-full rounded-md border border-gray-300 p-2"></textarea>
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button type="button" (click)="close.emit()" class="rounded-md bg-gray-200 px-4 py-2 text-gray-700">Cancel</button>
+        <button type="submit" [disabled]="groupForm.invalid" class="rounded-md bg-blue-600 px-4 py-2 text-white">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
